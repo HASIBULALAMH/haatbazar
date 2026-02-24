@@ -7,6 +7,7 @@ use App\Http\Controllers\Seller\Auth\RegisterController as SellerRegisterControl
 use App\Http\Controllers\Seller\Auth\LoginController as SellerLoginController;
 use App\Http\Controllers\Admin\Auth\LoginController as AdminLoginController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Seller\ShopController;
 use Illuminate\Support\Facades\Route;
 
 // Homepage
@@ -52,6 +53,13 @@ Route::prefix('seller')->name('seller.')->group(function () {
     Route::middleware(['auth', 'seller'])->group(function () {
         Route::get('/dashboard', fn() => view('seller.dashboard'))->name('dashboard');
         Route::post('/logout', [SellerLoginController::class, 'destroy'])->name('logout');
+
+        // Shop
+        Route::get('/shop/create', [ShopController::class, 'create'])->name('shop.create');
+        Route::post('/shop', [ShopController::class, 'store'])->name('shop.store');
+        Route::get('/shop/edit', [ShopController::class, 'edit'])->name('shop.edit');
+        Route::patch('/shop', [ShopController::class, 'update'])->name('shop.update');
+
     });
 });
 

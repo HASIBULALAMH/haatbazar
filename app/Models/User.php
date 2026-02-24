@@ -49,4 +49,10 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+
+    public function shop()
+    {
+        return $this->hasOne(Shop::class);
+    }
 }

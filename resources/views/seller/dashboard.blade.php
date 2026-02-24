@@ -54,7 +54,7 @@
         <div class="quick-action-icon">📦</div>
         <div class="quick-action-label">Manage Orders</div>
     </a>
-    <a href="#" class="quick-action">
+    <a href="{{ route('seller.shop.edit') }}" class="quick-action">
         <div class="quick-action-icon">🏪</div>
         <div class="quick-action-label">Edit Shop</div>
     </a>
@@ -92,7 +92,7 @@
         <div style="font-weight:600; color:#fcd34d; margin-bottom:4px;">Setup Your Shop</div>
         <div style="font-size:13px; color:var(--text-muted);">You haven't created your shop yet. Create your shop to start selling!</div>
     </div>
-    <a href="#" style="background:linear-gradient(135deg,#d97706,#b45309); color:#fff; padding:10px 20px; border-radius:10px; font-size:13px; font-weight:600; text-decoration:none; white-space:nowrap;">
+    <a href="{{ route('seller.shop.create') }}" style="background:linear-gradient(135deg,#d97706,#b45309); color:#fff; padding:10px 20px; border-radius:10px; font-size:13px; font-weight:600; text-decoration:none; white-space:nowrap;">
         Create Shop
     </a>
 </div>
