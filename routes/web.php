@@ -5,6 +5,8 @@ use App\Http\Controllers\Buyer\Auth\RegisterController;
 use App\Http\Controllers\Buyer\Auth\LoginController;
 use App\Http\Controllers\Seller\Auth\RegisterController as SellerRegisterController;
 use App\Http\Controllers\Seller\Auth\LoginController as SellerLoginController;
+use App\Http\Controllers\Admin\Auth\LoginController as AdminLoginController;
+
 use Illuminate\Support\Facades\Route;
 
 // Homepage
@@ -46,9 +48,28 @@ Route::prefix('seller')->name('seller.')->group(function () {
         Route::post('/login', [SellerLoginController::class, 'store'])->name('login.store');
     });
 
-     // Protected 
+     // Protected
     Route::middleware(['auth', 'seller'])->group(function () {
         Route::get('/dashboard', fn() => view('seller.dashboard'))->name('dashboard');
         Route::post('/logout', [SellerLoginController::class, 'destroy'])->name('logout');
+    });
+});
+
+
+
+
+// Admin routes
+Route::prefix('admin')->name('admin.')->group(function () {
+
+    // Guest only
+    Route::middleware('guest')->group(function () {
+        Route::get('/login', [AdminLoginController::class, 'create'])->name('login');
+        Route::post('/login', [AdminLoginController::class, 'store'])->name('login.store');
+    });
+
+    // Protected
+    Route::middleware(['auth', 'admin'])->group(function () {
+        Route::get('/dashboard', fn() => view('admin.dashboard'))->name('dashboard');
+        Route::post('/logout', [AdminLoginController::class, 'destroy'])->name('logout');
     });
 });

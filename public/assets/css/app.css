@@ -801,5 +801,51 @@ img { max-width: 100%; }
         .seller-sidebar .nav-section-title {
             color: rgba(252, 211, 77, 0.4);
         }
+                /* ========================================
+           ADMIN THEME - Indigo/Purple
+        ======================================== */
+                :root {
+                    --admin: #6366f1;
+                    --admin-dark: #4f46e5;
+                    --admin-light: #a5b4fc;
+                }
+
+                .admin-logo {
+                    background: linear-gradient(135deg, var(--admin-light), var(--admin)) !important;
+                    -webkit-background-clip: text !important;
+                    -webkit-text-fill-color: transparent !important;
+                    background-clip: text !important;
+                }
+
+                .admin-badge {
+                    background: rgba(99, 102, 241, 0.12) !important;
+                    border: 1px solid rgba(99, 102, 241, 0.25) !important;
+                    color: var(--admin-light) !important;
+                    display: inline-block;
+                    font-size: 10px;
+                    font-weight: 600;
+                    letter-spacing: 1.5px;
+                    text-transform: uppercase;
+                    padding: 3px 10px;
+                    border-radius: 20px;
+                    margin-top: 6px;
+                }
+
+                .admin-active {
+                    background: rgba(99, 102, 241, 0.12) !important;
+                    color: var(--admin-light) !important;
+                }
+
+                .admin-active .nav-icon {
+                    color: var(--admin) !important;
+                }
+
+                .admin-avatar {
+                    background: linear-gradient(135deg, var(--admin), var(--admin-dark)) !important;
+                }
+
+                .admin-sidebar .nav-section-title {
+                    color: rgba(165, 180, 252, 0.4);
+                }
 }
 
