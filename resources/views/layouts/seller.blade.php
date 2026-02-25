@@ -53,7 +53,7 @@
 
             <div class="nav-section-title">Store</div>
 
-            <a href="#"
+            <a href="{{ route('seller.shop.edit') }}"
                class="nav-item {{ request()->routeIs('seller.shop*') ? 'seller-active' : '' }}">
                 <i class="fa fa-store nav-icon"></i> My Shop
             </a>

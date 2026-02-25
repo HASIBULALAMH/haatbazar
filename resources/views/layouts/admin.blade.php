@@ -41,12 +41,12 @@
                 <i class="fa fa-users nav-icon"></i> Users
             </a>
 
-            <a href="#"
+            <a href=""
                class="nav-item {{ request()->routeIs('admin.sellers*') ? 'admin-active' : '' }}">
                 <i class="fa fa-store nav-icon"></i> Sellers
             </a>
 
-            <a href="#"
+            <a href="{{ route('admin.shops.index') }}"
                class="nav-item {{ request()->routeIs('admin.shops*') ? 'admin-active' : '' }}">
                 <i class="fa fa-shop nav-icon"></i> Shops
             </a>
@@ -58,7 +58,7 @@
                 <i class="fa fa-layer-group nav-icon"></i> Categories
             </a>
 
-            <a href="#"
+            <a href="{{ route('admin.products.index') }}"
                class="nav-item {{ request()->routeIs('admin.products*') ? 'admin-active' : '' }}">
                 <i class="fa fa-box nav-icon"></i> Products
             </a>

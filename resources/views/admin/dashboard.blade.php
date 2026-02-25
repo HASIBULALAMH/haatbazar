@@ -47,7 +47,7 @@
             <div class="quick-action-icon">👥</div>
             <div class="quick-action-label">Manage Users</div>
         </a>
-        <a href="#" class="quick-action">
+        <a href="{{ route('admin.shops.index') }}" class="quick-action">
             <div class="quick-action-icon">🏪</div>
             <div class="quick-action-label">Manage Shops</div>
         </a>

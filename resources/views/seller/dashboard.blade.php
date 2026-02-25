@@ -3,7 +3,15 @@
 @section('title', 'Seller Dashboard')
 
 @section('content')
-
+@if(Auth::user()->shop && !Auth::user()->shop->is_approved)
+    <div style="background:rgba(245,158,11,0.08); border:1px solid rgba(245,158,11,0.2); border-radius:12px; padding:14px 18px; margin-bottom:24px; display:flex; align-items:center; gap:12px;">
+        <i class="fa fa-clock" style="color:#fcd34d; font-size:18px;"></i>
+        <div>
+            <div style="font-weight:600; color:#fcd34d; font-size:14px;">Shop Pending Approval</div>
+            <div style="font-size:13px; color:var(--text-muted);">Your shop is under review. You'll be notified once approved.</div>
+        </div>
+    </div>
+@endif
 <div class="topbar">
     <div>
         <h1 class="topbar-title">Welcome, {{ explode(' ', Auth::user()->name)[0] }}! 🏪</h1>
@@ -97,5 +105,7 @@
     </a>
 </div>
 @endif
+
+
 
 @endsection

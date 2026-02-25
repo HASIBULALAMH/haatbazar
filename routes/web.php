@@ -9,6 +9,8 @@ use App\Http\Controllers\Admin\Auth\LoginController as AdminLoginController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Seller\ProductController;
 use App\Http\Controllers\Seller\ShopController;
+use App\Http\Controllers\Admin\ShopController as AdminShopController;
+use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use Illuminate\Support\Facades\Route;
 
 // Homepage
@@ -85,5 +87,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/dashboard', fn() => view('admin.dashboard'))->name('dashboard');
         Route::post('/logout', [AdminLoginController::class, 'destroy'])->name('logout');
         Route::resource('categories', CategoryController::class);
+
+         // Shops
+    Route::get('/shops', [AdminShopController::class, 'index'])->name('shops.index');
+    Route::patch('/shops/{shop}/approve', [AdminShopController::class, 'approve'])->name('shops.approve');
+    Route::patch('/shops/{shop}/reject', [AdminShopController::class, 'reject'])->name('shops.reject');
+
+    // Products
+    Route::get('/products', [AdminProductController::class, 'index'])->name('products.index');
+
     });
 });
