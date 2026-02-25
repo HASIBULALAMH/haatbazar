@@ -15,8 +15,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController as PublicProductController;
 use App\Http\Controllers\Admin\UserController;
-
-
+use App\Http\Controllers\Admin\DashboardController;
 
 // Public routes
     Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -90,7 +89,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     // Protected
     Route::middleware(['auth', 'admin'])->group(function () {
-        Route::get('/dashboard', fn() => view('admin.dashboard'))->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
         Route::post('/logout', [AdminLoginController::class, 'destroy'])->name('logout');
         Route::resource('categories', CategoryController::class);
 
