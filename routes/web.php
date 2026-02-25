@@ -7,6 +7,7 @@ use App\Http\Controllers\Seller\Auth\RegisterController as SellerRegisterControl
 use App\Http\Controllers\Seller\Auth\LoginController as SellerLoginController;
 use App\Http\Controllers\Admin\Auth\LoginController as AdminLoginController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Seller\ProductController;
 use App\Http\Controllers\Seller\ShopController;
 use Illuminate\Support\Facades\Route;
 
@@ -60,6 +61,10 @@ Route::prefix('seller')->name('seller.')->group(function () {
         Route::get('/shop/edit', [ShopController::class, 'edit'])->name('shop.edit');
         Route::patch('/shop', [ShopController::class, 'update'])->name('shop.update');
 
+         // Products
+    Route::resource('products', ProductController::class);
+
+    Route::delete('/products/images/{image}', [ProductController::class, 'destroyImage'])->name('products.images.destroy');
     });
 });
 

@@ -36,7 +36,7 @@
                 <i class="fa fa-gauge nav-icon"></i> Dashboard
             </a>
 
-            <a href="#"
+            <a href="{{ route('seller.products.index') }}"
                class="nav-item {{ request()->routeIs('seller.products*') ? 'seller-active' : '' }}">
                 <i class="fa fa-box nav-icon"></i> My Products
             </a>

@@ -13,7 +13,7 @@
         <a href="#" class="btn-icon" title="Notifications">
             <i class="fa fa-bell"></i>
         </a>
-        <a href="#" class="btn-icon" title="Add Product">
+        <a href="{{ route('seller.products.create') }}" class="btn-icon" title="Add Product">
             <i class="fa fa-plus"></i>
         </a>
     </div>
@@ -46,7 +46,7 @@
 {{-- Quick Actions --}}
 <h2 class="section-title">Quick Actions</h2>
 <div class="quick-actions">
-    <a href="#" class="quick-action">
+    <a href="{{ route('seller.products.create') }}" class="quick-action">
         <div class="quick-action-icon">➕</div>
         <div class="quick-action-label">Add Product</div>
     </a>
@@ -78,7 +78,7 @@
     <div class="empty-state">
         <i class="fa fa-bag-shopping"></i>
         <p>No orders yet. Start by adding your products!</p>
-        <a href="#" style="color:#fcd34d; font-size:13px; margin-top:8px; display:inline-block;">
+        <a href="{{ route('seller.products.create') }}" style="color:#fcd34d; font-size:13px; margin-top:8px; display:inline-block;">
             Add Your First Product →
         </a>
     </div>
