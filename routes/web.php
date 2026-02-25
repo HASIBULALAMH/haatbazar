@@ -14,8 +14,9 @@ use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController as PublicProductController;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Seller\DashboardController as SellerDashboardController;
 
 // Public routes
     Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -59,7 +60,7 @@ Route::prefix('seller')->name('seller.')->group(function () {
 
      // Protected
     Route::middleware(['auth', 'seller'])->group(function () {
-        Route::get('/dashboard', fn() => view('seller.dashboard'))->name('dashboard');
+       Route::get('/dashboard', [SellerDashboardController::class, 'index'])->name('dashboard');
         Route::post('/logout', [SellerLoginController::class, 'destroy'])->name('logout');
 
         // Shop
@@ -89,7 +90,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     // Protected
     Route::middleware(['auth', 'admin'])->group(function () {
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
         Route::post('/logout', [AdminLoginController::class, 'destroy'])->name('logout');
         Route::resource('categories', CategoryController::class);
 
