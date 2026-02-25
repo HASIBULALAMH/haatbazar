@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController as PublicProductController;
+use App\Http\Controllers\Admin\UserController;
 
 
 
@@ -100,6 +101,15 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     // Products
     Route::get('/products', [AdminProductController::class, 'index'])->name('products.index');
+
+     // Users
+    Route::get('/users', [UserController::class, 'index'])->name('users.index');
+    Route::patch('/users/{user}/toggle', [UserController::class, 'toggle'])->name('users.toggle');
+
+    // Sellers
+    Route::get('/sellers', [UserController::class, 'sellers'])->name('sellers.index');
+    Route::patch('/sellers/{user}/toggle', [UserController::class, 'sellerToggle'])->name('sellers.toggle');
+
 
     });
 });

@@ -36,12 +36,12 @@
                 <i class="fa fa-gauge nav-icon"></i> Dashboard
             </a>
 
-            <a href="#"
+            <a href="{{ route('admin.users.index') }}"
                class="nav-item {{ request()->routeIs('admin.users*') ? 'admin-active' : '' }}">
                 <i class="fa fa-users nav-icon"></i> Users
             </a>
 
-            <a href=""
+            <a href="{{ route('admin.sellers.index') }}"
                class="nav-item {{ request()->routeIs('admin.sellers*') ? 'admin-active' : '' }}">
                 <i class="fa fa-store nav-icon"></i> Sellers
             </a>
