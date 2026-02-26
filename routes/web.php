@@ -19,6 +19,8 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Buyer\AddressController;
 use App\Http\Controllers\Seller\DashboardController as SellerDashboardController;
 use App\Http\Controllers\Seller\ProfileController as SellerProfileController;
+use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
+
 
 // Public routes
     Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -100,12 +102,9 @@ Route::prefix('seller')->name('seller.')->group(function () {
 // Admin routes
 Route::prefix('admin')->name('admin.')->group(function () {
 
-    // Guest only
-    Route::middleware('guest')->group(function () {
         // Authentication
         Route::get('/login', [AdminLoginController::class, 'create'])->name('login');
         Route::post('/login', [AdminLoginController::class, 'store'])->name('login.store');
-    });
 
     // Protected
     Route::middleware(['auth', 'admin'])->group(function () {
@@ -132,5 +131,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/sellers', [UserController::class, 'sellers'])->name('sellers.index');
         Route::patch('/sellers/{user}/toggle', [UserController::class, 'sellerToggle'])->name('sellers.toggle');
 
-        });
+        // Profile
+        Route::get('/profile', [AdminProfileController::class, 'index'])->name('profile');
+        Route::patch('/profile', [AdminProfileController::class, 'update'])->name('profile.update');
+        Route::put('/profile/password', [AdminProfileController::class, 'updatePassword'])->name('password.update');
+    });
 });
