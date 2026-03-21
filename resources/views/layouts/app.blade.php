@@ -35,20 +35,18 @@
 
         {{-- Nav Actions --}}
         <div class="nav-actions">
-            @auth
-                @if(Auth::user()->role === 'seller')
-                    <a href="{{ route('seller.dashboard') }}" class="nav-btn nav-btn-ghost">
-                        <i class="fa fa-store"></i> My Shop
-                    </a>
-                @elseif(Auth::user()->role === 'admin')
-                    <a href="{{ route('admin.dashboard') }}" class="nav-btn nav-btn-ghost">
-                        <i class="fa fa-gauge"></i> Admin
-                    </a>
-                @else
-                    <a href="{{ route('buyer.dashboard') }}" class="nav-btn nav-btn-ghost">
-                        <i class="fa fa-user"></i> {{ explode(' ', Auth::user()->name)[0] }}
-                    </a>
-                @endif
+            @if(Auth::guard('admin')->check())
+                <a href="{{ route('admin.dashboard') }}" class="nav-btn nav-btn-ghost">
+                    <i class="fa fa-gauge"></i> Admin
+                </a>
+            @elseif(Auth::guard('seller')->check())
+                <a href="{{ route('seller.dashboard') }}" class="nav-btn nav-btn-ghost">
+                    <i class="fa fa-store"></i> My Shop
+                </a>
+            @elseif(Auth::guard('buyer')->check())
+                <a href="{{ route('buyer.dashboard') }}" class="nav-btn nav-btn-ghost">
+                    <i class="fa fa-user"></i> {{ explode(' ', Auth::guard('buyer')->user()->name)[0] }}
+                </a>
             @else
                 <a href="{{ route('buyer.login') }}" class="nav-btn nav-btn-ghost">
                     <i class="fa fa-user"></i> Login
@@ -56,7 +54,7 @@
                 <a href="{{ route('buyer.register') }}" class="nav-btn nav-btn-primary">
                     Sign Up
                 </a>
-            @endauth
+            @endif
 
             <a href="#" class="nav-icon-btn" title="Cart">
                 <i class="fa fa-cart-shopping"></i>
@@ -112,12 +110,16 @@
             <div>
                 <h4 style="font-size:13px; font-weight:600; letter-spacing:1px; text-transform:uppercase; color:var(--text-muted); margin-bottom:14px;">Account</h4>
                 <div style="display:flex; flex-direction:column; gap:8px;">
-                    @auth
+                    @if(Auth::guard('admin')->check())
+                        <a href="{{ route('admin.dashboard') }}" class="footer-link">Dashboard</a>
+                    @elseif(Auth::guard('seller')->check())
+                        <a href="{{ route('seller.dashboard') }}" class="footer-link">My Store</a>
+                    @elseif(Auth::guard('buyer')->check())
                         <a href="{{ route('buyer.dashboard') }}" class="footer-link">My Account</a>
                     @else
                         <a href="{{ route('buyer.login') }}" class="footer-link">Login</a>
                         <a href="{{ route('buyer.register') }}" class="footer-link">Register</a>
-                    @endauth
+                    @endif
                 </div>
             </div>
         </div>

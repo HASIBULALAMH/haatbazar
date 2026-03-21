@@ -4,22 +4,22 @@ namespace App\Http\Controllers\Seller\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
-    //register form
+    // Show registration form
     public function create()
     {
         return view('auth.seller.register');
     }
 
-    // Handle register
+    // Handle registration
     public function store(Request $request)
     {
+        // Validate input
         $request->validate([
             'name'     => 'required|string|max:100',
             'email'    => 'required|email|unique:users,email',
@@ -27,6 +27,7 @@ class RegisterController extends Controller
             'password' => 'required|min:8|confirmed',
         ]);
 
+        // Create seller user
         $user = User::create([
             'name'     => $request->name,
             'email'    => $request->email,
@@ -35,10 +36,8 @@ class RegisterController extends Controller
             'role'     => 'seller',
         ]);
 
-        event(new Registered($user));
-
-        Auth::login($user);
-
+        // Login seller user
+        Auth::guard('seller')->login($user);
         return redirect()->route('seller.dashboard');
     }
 }

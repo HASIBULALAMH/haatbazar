@@ -90,10 +90,10 @@
             <div class="sidebar-footer">
                 <div class="user-info">
                     <div class="user-avatar-sm admin-avatar">
-                        {{ strtoupper(substr(Auth::user()->name, 0, 2)) }}
+                        {{ strtoupper(substr(Auth::guard('admin')->user()->name, 0, 2)) }}
                     </div>
                     <div class="user-details">
-                        <div class="user-name">{{ Auth::user()->name }}</div>
+                        <div class="user-name">{{ Auth::guard('admin')->user()->name }}</div>
                         <div class="user-role" style="color:#a5b4fc;">Administrator</div>
                     </div>
                 </div>

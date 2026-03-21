@@ -8,42 +8,43 @@ use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
-    //create login form
+    // Show login form
     public function create()
     {
         return view('auth.buyer.login');
     }
 
-    // login store
+    // Handle login
     public function store(Request $request)
     {
+        // Validate input
         $request->validate([
             'email'    => 'required|email',
             'password' => 'required',
         ]);
-
-        if (Auth::attempt([
-            'email' =>$request->email,
-            'password' =>$request->password,
-            'role' => 'buyer',
-        ],$request->remember))
+    // Attempt login with buyer guard and role check
+        if (Auth::guard('buyer')->attempt([
+            'email'    => $request->email,
+            'password' => $request->password,
+            'role'     => 'buyer',
+        ], $request->remember))
         {
-            $request->session()->regenerate();
-
+        $request->session()->regenerate();
             return redirect()->route('buyer.dashboard');
         }
+
         return back()->withErrors([
             'email' => 'Invalid credentials or not a buyer account.',
         ])->onlyInput('email');
     }
 
-    // logout
+    // Handle logout
     public function destroy(Request $request)
     {
-        Auth::logout();
+        Auth::guard('buyer')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect()->route('buyer.login');
 
     }
- }
+}

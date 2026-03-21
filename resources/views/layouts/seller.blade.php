@@ -80,14 +80,14 @@
         <div class="sidebar-footer">
             <div class="user-info">
                 <div class="user-avatar-sm seller-avatar">
-                    @if(Auth::user()->avatar)
-                        <img src="{{ asset('storage/' . Auth::user()->avatar) }}" alt="avatar">
+                    @if(Auth::guard('seller')->user()->avatar)
+                        <img src="{{ asset('storage/' . Auth::guard('seller')->user()->avatar) }}" alt="avatar">
                     @else
-                        {{ strtoupper(substr(Auth::user()->name, 0, 2)) }}
+                        {{ strtoupper(substr(Auth::guard('seller')->user()->name, 0, 2)) }}
                     @endif
                 </div>
                 <div class="user-details">
-                    <div class="user-name">{{ Auth::user()->name }}</div>
+                    <div class="user-name">{{ Auth::guard('seller')->user()->name }}</div>
                     <div class="user-role" style="color:#fcd34d;">Seller</div>
                 </div>
             </div>

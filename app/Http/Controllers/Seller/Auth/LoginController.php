@@ -8,43 +8,42 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    //login form
+    // Show login form
     public function create()
     {
         return view('auth.seller.login');
     }
 
-    //login store
+    // Handle login
     public function store(Request $request)
     {
+        // Validate input
         $request->validate([
             'email'    => 'required|email',
             'password' => 'required',
         ]);
 
-        if (Auth::attempt([
-            'email' =>$request->email,
-            'password' =>$request->password,
-            'role' => 'seller',
-        ],$request->remember))
-        {
+        // Attempt login with seller guard and role check
+        if (Auth::guard('seller')->attempt([
+            'email'    => $request->email,
+            'password' => $request->password,
+            'role'     => 'seller',
+        ], $request->remember)) {
             $request->session()->regenerate();
-
             return redirect()->route('seller.dashboard');
         }
+
         return back()->withErrors([
             'email' => 'Invalid credentials or not a seller account.',
         ])->onlyInput('email');
     }
 
-
-    // logout
+    // Handle logout
     public function destroy(Request $request)
     {
-        Auth::logout();
+        Auth::guard('seller')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect()->route('seller.login');
-
     }
 }

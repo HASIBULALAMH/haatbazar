@@ -41,7 +41,7 @@ Route::prefix('buyer')->name('buyer.')->group(function () {
     });
 
     // Protected
-    Route::middleware(['auth', 'buyer'])->group(function () {
+    Route::middleware(['auth:buyer', 'buyer'])->group(function () {
         // Dashboard
         Route::get('/dashboard', fn() => view('buyer.dashboard'))->name('dashboard');
         // Profile
@@ -73,7 +73,7 @@ Route::prefix('seller')->name('seller.')->group(function () {
     });
 
      // Protected
-    Route::middleware(['auth', 'seller'])->group(function () {
+    Route::middleware(['auth:seller', 'seller'])->group(function () {
         // Dashboard
         Route::get('/dashboard', [SellerDashboardController::class, 'index'])->name('dashboard');
         // Logout
@@ -107,7 +107,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/login', [AdminLoginController::class, 'store'])->name('login.store');
 
     // Protected
-    Route::middleware(['auth', 'admin'])->group(function () {
+    Route::middleware(['auth:admin', 'admin'])->group(function () {
         // Dashboard
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
         // Logout
