@@ -43,7 +43,7 @@
                     Dashboard
                 </a>
 
-                <a href="#" class="nav-item {{ request()->routeIs('buyer.orders*') ? 'active' : '' }}">
+                <a href="{{ route('buyer.orders.index') }}" class="nav-item {{ request()->routeIs('buyer.orders*') ? 'active' : '' }}">
                     <i class="fa fa-box nav-icon"></i>
                     My Orders
                     {{-- <span class="nav-badge">3</span> --}}

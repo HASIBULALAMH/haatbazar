@@ -41,7 +41,7 @@
                 <i class="fa fa-box nav-icon"></i> My Products
             </a>
 
-            <a href="#"
+            <a href="{{ route('seller.orders.index') }}"
                class="nav-item {{ request()->routeIs('seller.orders*') ? 'seller-active' : '' }}">
                 <i class="fa fa-bag-shopping nav-icon"></i> Orders
             </a>

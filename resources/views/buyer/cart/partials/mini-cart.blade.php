@@ -50,7 +50,7 @@
         <a href="{{ route('buyer.cart.index') }}" class="mini-cart-btn-view">
             <i class="fa fa-cart-shopping"></i> View Cart
         </a>
-        <a href="#" class="mini-cart-btn-checkout">
+        <a href="{{ route('buyer.orders.checkout') }}" class="mini-cart-btn-checkout">
             Proceed to Checkout <i class="fa fa-arrow-right"></i>
         </a>
     </div>

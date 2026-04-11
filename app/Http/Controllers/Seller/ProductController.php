@@ -51,7 +51,7 @@ class ProductController extends Controller
         'stock'          => 'required|integer|min:0',
         'is_active'      => 'boolean',
         'images'         => 'nullable|array',
-        'images.*'       => 'image|max:2048',
+        'images.*'       => 'image|max:102400',
     ]);
 
     $shop = Auth::user()->shop;
@@ -110,7 +110,7 @@ class ProductController extends Controller
         'discount_price' => 'nullable|numeric|min:0|lt:price',
         'stock'          => 'required|integer|min:0',
         'images'         => 'nullable|array',
-        'images.*'       => 'image|max:2048',
+        'images.*'       => 'image|max:102400',
     ]);
 
     $product->update([

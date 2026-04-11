@@ -17,10 +17,12 @@ use App\Http\Controllers\ProductController as PublicProductController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Buyer\AddressController;
+use App\Http\Controllers\Seller\OrderController as SellerOrderController;
 use App\Http\Controllers\Seller\DashboardController as SellerDashboardController;
 use App\Http\Controllers\Seller\ProfileController as SellerProfileController;
 use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
 use App\Http\Controllers\Buyer\CartController;
+use App\Http\Controllers\Buyer\OrderController;
 
 // Public routes
     Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -63,6 +65,14 @@ Route::prefix('buyer')->name('buyer.')->group(function () {
         Route::delete('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
         Route::delete('/cart/{cartItem}/remove', [CartController::class, 'remove'])->name('cart.remove');
 
+
+
+        // Orders
+        Route::get('/orders/checkout', [OrderController::class, 'checkout'])->name('orders.checkout');
+        Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
+        Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+        Route::get('/orders/{order}', [OrderController::class, 'show'])->name('orders.show');
+        Route::patch('/orders/{order}/cancel', [OrderController::class, 'cancel'])->name('orders.cancel');
     });
 });
 
@@ -101,6 +111,12 @@ Route::prefix('seller')->name('seller.')->group(function () {
         Route::get('/profile', [SellerProfileController::class, 'index'])->name('profile.edit');
          Route::patch('/profile', [SellerProfileController::class, 'update'])->name('profile.update');
         Route::put('/profile/password', [SellerProfileController::class, 'updatePassword'])->name('password.update');
+
+
+        // Seller Orders
+        Route::get('/orders', [SellerOrderController::class, 'index'])->name('orders.index');
+        Route::get('/orders/{order}', [SellerOrderController::class, 'show'])->name('orders.show');
+        Route::patch('/orders/{order}/status', [SellerOrderController::class, 'updateStatus'])->name('orders.status');
     });
 });
 
