@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class OrderController extends Controller
 {
@@ -206,5 +207,25 @@ class OrderController extends Controller
         });
 
         return back()->with('success', 'Order cancelled successfully!');
+    }
+
+    /**
+     * Order invoice PDF download।
+     */
+    public function invoice(Order $order)
+    {
+        /** @var \App\Models\User $user */
+        $user = Auth::guard('buyer')->user();
+
+        if ($order->user_id !== $user->id) {
+            abort(403);
+        }
+
+        $order->load('items', 'buyer');
+
+        $pdf = Pdf::loadView('buyer.orders.invoice', compact('order'))
+            ->setPaper('a4', 'portrait');
+
+        return $pdf->download('invoice-order-' . $order->id . '.pdf');
     }
 }
